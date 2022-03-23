@@ -1,10 +1,13 @@
 import os
 import random
+from utils.twillio import TwillioBuilder
 
 class Thermometer:
 
     @classmethod
     def get_reading(self):
+        client = TwillioBuilder(account_sid=os.getenv('TWILIO_ACCT_SID'), auth_token=os.getenv('TWILIO_AUTH_TOKEN'))
+
         try:
             _os = os.uname().nodename
 
@@ -22,4 +25,4 @@ class Thermometer:
             print('Running on a local machine, not setting board attributes. Generating random values for temperature')
             temp = random.randint(60,90)
 
-        return temp
+        client.send_message(f'The current temperature is: {temp}')

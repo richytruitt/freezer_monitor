@@ -1,9 +1,20 @@
-from utils.twillio import TwillioBuilder
 from utils.thermometer import Thermometer
 import os
+from datetime import datetime
+import time
+from apscheduler.schedulers.background import BackgroundScheduler
 
-client = TwillioBuilder(account_sid=os.getenv('TWILIO_ACCT_SID'), auth_token=os.getenv('TWILIO_AUTH_TOKEN'))
+if __name__ == '__main__':
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(Thermometer.get_reading, 'interval', minutes=3)
+    scheduler.start()
+    print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
 
-temp = Thermometer.get_reading()
+    try:
+        # This is here to simulate application activity (which keeps the main thread alive).
+        while True:
+            time.sleep(2)
+    except (KeyboardInterrupt, SystemExit):
+        # Not strictly necessary if daemonic mode is enabled but should be done if possible
+        scheduler.shutdown()
 
-client.send_message(f'The current temperature is: {temp}')
