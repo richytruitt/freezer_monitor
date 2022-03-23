@@ -8,5 +8,8 @@ User=pi
 WorkingDirectory=/home/pi/freezer_monitor
 ExecStart=/usr/bin/python3 /home/pi/freezer_monitor/main.py
 Restart=always
+Environment=TWILIO_ACCT_SID='ACfb0c56c2ba89c89d62e6e41f2d1dff3f0727'
+Environment=TWILIO_AUTH_TOKEN='8af5df6401a3c7de3a1f1ffb8d5cb9517270'
+
 [Install]
 WantedBy=multi-user.target
