@@ -1,0 +1,12 @@
+[Unit]
+Description=Freezer Monitor
+After=network.target
+
+[Service]
+type=simple
+User=pi
+WorkingDirectory=/home/pi/freezer_monitor
+ExecStart=/usr/bin/python3 /home/pi/freezer_monitor/main.py
+Restart=always
+[Install]
+WantedBy=multi-user.target
