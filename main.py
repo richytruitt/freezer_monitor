@@ -1,7 +1,8 @@
 from utils.twillio import TwillioBuilder
 from utils.thermometer import Thermometer
+import os
 
-client = TwillioBuilder(account_sid='ACfb0c56c2ba89c89d62e6e41f2d1dff3f', auth_token='4de437c048d1053f5bbbc66a54c61593')
+client = TwillioBuilder(account_sid=os.getenv('TWILIO_ACCT_SID'), auth_token=os.getenv('TWILIO_AUTH_TOKEN'))
 
 temp = Thermometer.get_reading()
 
