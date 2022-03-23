@@ -1,0 +1,2 @@
+twilio
+adafruit-circuitpython-mcp9808
